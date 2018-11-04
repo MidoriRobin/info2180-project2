@@ -2,18 +2,22 @@
 
 window.onload = function(){
 	var pArea = document.querySelector("#puzzlearea").querySelectorAll("div");
+	
 	console.log(pArea);
 	
-	//pArea[0].classList.add("puzzlepiece");
-	//pArea[1].classList.add("puzzlepiece");
+	var locList = ["square_1_1","square_1_2","square_1_3","square_1_4",
+				"square_2_1","square_2_2","square_2_3","square_2_4",
+				"square_3_1", "square_3_2", "square_3_3", "square_3_4",
+				"square_4_1", "square_4_2", "square_4_3", "square_4_4"];
+				
+	console.log(locList);
 	
 	//Function to set up numbers as puzzlepieces
-	
-	
-	var appFrame = () =>{
 		
+	var appFrame = () =>{
+		//Adds the puzzle piece class to all the pieces
 		for(var i = 0; i < pArea.length; i++){
-			//Adds the puzzle piece class to all the pieces
+			
 			pArea[i].classList.add("puzzlepiece");
 			//Sets pieces in their respective positions
 			
@@ -37,12 +41,9 @@ window.onload = function(){
 		}
 	}
 	
-	// function call
 	appFrame();
 	
-	//CONTINUE ------ To set up the background image on each piece
-	
-	
+	//Sets up the background on each piece
 	var bgSetup = () =>{
 		
 		for(var i = 0; i < pArea.length; i++){
@@ -61,17 +62,118 @@ window.onload = function(){
 				ypos = parseInt(-300);
 			}
 			
-			pArea[i].style.backgroundPosition = `${xpos}px ${ypos}px`
+			pArea[i].style.backgroundPosition = `${xpos}px ${ypos}px`;
 		}
 		
 	}
 	
 	bgSetup();
 	
+	//setting square ids 
+	for(var i = 0; i < pArea.length; i++){
+		
+		if (parseInt(pArea[i].style.top) === 0){
+			
+			//for (var i = 0; i < pArea.length; i++){
+			realPos = parseInt(pArea[i].style.left[0]) + 1
+			pArea[i].id = `square_1_${realPos}`;
+				
+			
+			
+		} else if (parseInt(pArea[i].style.top) === 100){
+			
+			//for (var i = 0; i < pArea.length; i++){
+			realPos = parseInt(pArea[i].style.left[0]) + 1;
+			pArea[i].id = `square_2_${realPos}`;
+				
+			
+			
+		} else if (parseInt(pArea[i].style.top) === 200){
+			
+			//for (var i = 0; i < pArea.length; i++){
+			realPos = parseInt(pArea[i].style.left[0]) + 1;
+			pArea[i].id = `square_3_${realPos}`;
+			
+			
+		} else if (parseInt(pArea[i].style.top) === 300){
+			
+			//for (var i = 0; i < pArea.length; i++){
+			realPos = parseInt(pArea[i].style.left[0]) + 1;
+			pArea[i].id = `square_4_${realPos}`;
+			
+			
+		}
+	}
 	
+	
+	//Function to move puzzle pieces
+	var movePiece = () =>{
+		
+	}
+	
+	//function to find squares
+	var findSquare = (x,y) => {
+		
+	}
+	
+	
+	/*var isMoveable = () =>{
+		this.id 
+		if(){
+			
+		}
+	}*/
+	
+	//to check if a square is empty
+	var isEmpty = (sqr) =>{
+		//for(var i = 0; i < locList.length; i++)
+			
+		for(var x = 0; x < pArea.length; x++){
+			if(sqr == pArea.id){
+				return true;
+				break
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	var locale = [];
+	//console.log(parseInt(pArea[9].style.top));
+	//console.log(parseInt(pArea[9].style.top) === 200);
+	//unuused code 
+	
+	//console.log(pArea[1].style.backgroundPosition);
+	
+	
+	//console.log(parseInt(pArea[1].style.backgroundPosition));
+	
+	//list of positions
+	//console.log(locale);
+	
+	//var lMod = locale.map(x => parseInt(x));
+	
+	//prints x values
+	//console.log(lMod);
+	
+	/*test region
+	
+	var acPos = parseInt(pArea[14].style.left[0]) + 1;
+	console.log(`The real position of this piece is: ${acPos}units from the left`);
+	*/
+	//pArea[14].style.top = "300px";
 	
 
 }
+
+
+
 
 /*
 var appFrame = () =>{
