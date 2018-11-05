@@ -74,53 +74,67 @@ window.onload = function(){
 	bgSetup();
 	
 	//setting square ids 
-	for(var i = 0; i < pArea.length; i++){
+	var reCal = () => {
+		for(var i = 0; i < pArea.length; i++){
 		
-		if (parseInt(pArea[i].style.top) === 0){
+			if (parseInt(pArea[i].style.top) === 0){
 			
-			//for (var i = 0; i < pArea.length; i++){
-			realPos = parseInt(pArea[i].style.left[0]) + 1
-			pArea[i].id = `square_1_${realPos}`;
+				//for (var i = 0; i < pArea.length; i++){
+				realPos = parseInt(pArea[i].style.left[0]) + 1
+				pArea[i].id = `square_1_${realPos}`;
 				
 			
 			
-		} else if (parseInt(pArea[i].style.top) === 100){
+			} else if (parseInt(pArea[i].style.top) === 100){
 			
-			//for (var i = 0; i < pArea.length; i++){
-			realPos = parseInt(pArea[i].style.left[0]) + 1;
-			pArea[i].id = `square_2_${realPos}`;
+				//for (var i = 0; i < pArea.length; i++){
+				realPos = parseInt(pArea[i].style.left[0]) + 1;
+				pArea[i].id = `square_2_${realPos}`;
 				
 			
 			
-		} else if (parseInt(pArea[i].style.top) === 200){
+			} else if (parseInt(pArea[i].style.top) === 200){
 			
-			//for (var i = 0; i < pArea.length; i++){
-			realPos = parseInt(pArea[i].style.left[0]) + 1;
-			pArea[i].id = `square_3_${realPos}`;
-			
-			
-		} else if (parseInt(pArea[i].style.top) === 300){
-			
-			//for (var i = 0; i < pArea.length; i++){
-			realPos = parseInt(pArea[i].style.left[0]) + 1;
-			pArea[i].id = `square_4_${realPos}`;
+				//for (var i = 0; i < pArea.length; i++){
+				realPos = parseInt(pArea[i].style.left[0]) + 1;
+				pArea[i].id = `square_3_${realPos}`;
 			
 			
+			} else if (parseInt(pArea[i].style.top) === 300){
+			
+				//for (var i = 0; i < pArea.length; i++){
+				realPos = parseInt(pArea[i].style.left[0]) + 1;
+				pArea[i].id = `square_4_${realPos}`;
+			
+			
+			}
 		}
 	}
 	
+	reCal();
 	
 	//Function to move a puzzle pieces (EMPTY!)
-	var movePiece = (piece, x ,y) =>{
+	var movePiece = (piece, x,y) =>{
 		piece.style.left = x + 'px';
 		piece.style.top = y + 'px';
 		
-		
+		piece.id = findEmpty();
+		//reCal();
 	}
 	
 	//function to find squares(EMPTY!)
 	var findSquare = (x,y) => {
 		
+	}
+	
+	//writing an alt to the above function 
+	//these get x and y values for a square and output them
+	var getxCoords = (sqr) => {
+		return((sqr[9] - 1) * 100);
+	}
+	
+	var getyCoords = (sqr) => {
+		return ((sqr[7] - 1) * 100);
 	}
 	
 	//Function to check if pieces are moveable
@@ -477,15 +491,60 @@ window.onload = function(){
 	});
 	*/
 	
-	//Adding event listners for each piece (Using for loop);
-	for(var i = 1; i < pArea.length; i++){
+	//Adding mouseover event listners for each piece (Using for loop);
+	for(var i = 0; i < pArea.length; i++){
 		pArea[i].addEventListener("mouseover", function(){
 			if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
+				this.classList.add("movablepiece");
+			} else if(isMoveable(this.id) == false && this.classList.contains("movablepiece")){
+				this.classList.remove("movablepiece");
 			}
 		})
 	};
 	
+	//Adds on click eventlisteners for each piece 
+	for(var i = 0; i < pArea.length; i++){
+		pArea[i].addEventListener("click", function(){
+			if(isMoveable(this.id)){
+				//thi
+				console.log(findEmpty());
+				movePiece(this,getxCoords(findEmpty()),getyCoords(findEmpty()))
+				console.log(findEmpty());
+			}
+		});
+	};
+	
+	
+	//Find the empty square
+	
+	var findEmpty = () =>{
+		//list of occupied squares
+		var occSq = [];
+		//empty square variable
+		var eSqre;
+		
+		for (var i = 0; i < pArea.length; i++){
+			occSq.push(pArea[i].id);
+		}
+		
+		for (var i = 0; i < locList.length; i++){
+			if(occSq.includes(locList[i]) == false){
+				eSqre = locList[i];
+			}
+		}
+		return eSqre;
+	};
+	
+	
+	
+	console.log(findEmpty());
+	console.log(getxCoords(findEmpty()));
+	console.log(getyCoords(findEmpty()));
+	
+	/*Test to move piece at 4x3
+	pArea[14].addEventListener("click", function(){
+		this.style.left = (parseInt(this.style.left) + 100) + 'px';
+	});*/
 }
 	
 	
