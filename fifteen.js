@@ -1,8 +1,8 @@
 // Author: Christopher Robinson
 
 window.onload = function(){
-	var pArea = document.querySelector("#puzzlearea").querySelectorAll("div");
-	
+	const pArea = document.querySelector("#puzzlearea").querySelectorAll("div");
+	const fpArea = document.querySelector("#puzzlearea");
 	console.log(pArea);
 	
 	var locList = ["square_1_1","square_1_2","square_1_3","square_1_4",
@@ -10,7 +10,11 @@ window.onload = function(){
 				"square_3_1", "square_3_2", "square_3_3", "square_3_4",
 				"square_4_1", "square_4_2", "square_4_3", "square_4_4"];
 				
-	console.log(locList);
+	//console.log(locList);
+	
+	//is moveable function?
+	
+	// Checks the adjacent squares via id 
 	
 	//Function to set up numbers as puzzlepieces
 		
@@ -106,79 +110,387 @@ window.onload = function(){
 	}
 	
 	
-	//Function to move puzzle pieces
-	var movePiece = () =>{
+	//Function to move a puzzle pieces (EMPTY!)
+	var movePiece = (piece, x ,y) =>{
+		piece.style.left = x + 'px';
+		piece.style.top = y + 'px';
+		
 		
 	}
 	
-	//function to find squares
+	//function to find squares(EMPTY!)
 	var findSquare = (x,y) => {
 		
 	}
 	
-	
-	/*var isMoveable = () =>{
-		this.id 
-		if(){
-			
-		}
-	}*/
-	
-	//to check if a square is empty
-	var isEmpty = (sqr) =>{
-		//for(var i = 0; i < locList.length; i++)
-			
-		for(var x = 0; x < pArea.length; x++){
-			if(sqr == pArea.id){
+	//Function to check if pieces are moveable
+	var isMoveable = (square) =>{
+		
+		/*if (square == "square_1_3"){
+			if(isEmpty("square_1_2")){
 				return true;
-				break
+			} else if(isEmpty("square_1_4")){
+				return true;
+			} else if(isEmpty("square_2_3")){
+				return true;
 			}
+		}*/
+		var x  
+		//Dead switch statement
+		switch (square){
+		
+		case "square_1_1":
+			if(isEmpty("square_1_2")){
+				return true;
+				break;
+			} else if(isEmpty("square_2_1")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+			
+		case "square_1_2":
+			if(isEmpty("square_1_1")){
+				return true;
+			} else if(isEmpty("square_1_3")){
+				return true;
+			} else if(isEmpty("square_2_2")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_1_3":
+			if(isEmpty("square_1_2")){
+				return true;
+			} else if(isEmpty("square_1_4")){
+				return true;
+			} else if(isEmpty("square_2_3")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_1_4":
+			if(isEmpty("square_1_3")){
+				return true;
+			} else if(isEmpty("square_2_4")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_2_1_":
+			if (isEmpty("square_1_1")){
+				return true;
+			} else if(isEmpty("square_2_2")){
+				return true;
+			} else if(isEmpty("square_3_1")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+	
+		case "square_2_2":
+			if(isEmpty("square_2_1")){
+				return true;
+			} else if(isEmpty("square_1_2")){
+				return true;
+			} else if(isEmpty("square_2_3")){
+				return true;
+			} else if(isEmpty("square_3_2")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_2_3":
+			if(isEmpty("square_2_2")){
+				return true;
+			} else if(isEmpty("square_1_3")){
+				return true;
+			} else if(isEmpty("square_2_4")){
+				return true;
+			}else if(isEmpty("square_3_3")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_2_4":
+			if(isEmpty("square_2_3")){
+				return true;
+			} else if(isEmpty("square_1_4")){
+				return true;
+			} else if(isEmpty("square_3_4")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_3_1":
+			if(isEmpty("square_2_1")){
+				return true;
+			} else if(isEmpty("square_3_2")){
+				return true;
+			} else if(isEmpty("square_4_1")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_3_2":
+			if(isEmpty("square_3_1")){
+				return true;
+			} else if(isEmpty("square_2_2")){
+				return true;
+			} else if(isEmpty("square_3_3")){
+				return true;
+			}else if(isEmpty("square_4_2")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_3_3":
+			if(isEmpty("square_3_2")){
+				return true;
+			} else if(isEmpty("square_2_3")){
+				return true;
+			} else if(isEmpty("square_3_4")){
+				return true;
+			}else if(isEmpty("square_4_3")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_3_4":
+			if(isEmpty("square_3_3")){
+				return true;
+			} else if(isEmpty("square_2_4")){
+				return true;
+			} else if(isEmpty("square_4_4")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_4_1":
+			if(isEmpty("square_3_1")){
+				return true;
+			} else if(isEmpty("square_4_2")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_4_2":
+			if(isEmpty("square_4_1")){
+				return true;
+			} else if(isEmpty("square_3_2")){
+				return true;
+			} else if(isEmpty("square_4_3")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_4_3":
+			if(isEmpty("square_4_2")){
+				return true;
+			} else if(isEmpty("square_3_3")){
+				return true;
+			} else if(isEmpty("square_4_4")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+		
+		case "square_4_4":
+			if(isEmpty("square_4_3")){
+				return true;
+			} else if(isEmpty("square_3_4")){
+				return true;
+			} else {
+				return false;
+			}
+			break;
+			
+		default:
+			return false;
 		}
+		
 		
 	}
 	
+	//to check if a square is empty by checking if the id exists on any of the puzzlepieces
+	// if true the id exists on one of the pieces and false if otherwise.
+	var isEmpty = (sqr) =>{
+		//for(var i = 0; i < locList.length; i++)
+		/*
+		var dList = [];
+		//return pArea[1].id;
+		//for loop to retrive the id for each piece
+		for(var c = 0; c < pArea.length; c++){
+			dList.push(pArea[c].id);
+		}
+		
+		//return dList;
+		var status;
+		
+		for(var x = 0; x < dList.length; x++){
+			
+			if(sqr == dList[x]){
+				status = 0;
+			} else{
+				status = 1;
+			}
+			
+		}
+		
+		if(status == 0){
+			
+			return true;
+			
+		} else if(status == 1){
+			
+			return false;
+			
+		}*/
+		
+		
+		var x
+		//while (x != 0)
+		for (var a = 0; a < pArea.length; a++){
+			
+				//console.log(pArea[a].id);
+			if (sqr == pArea[a].id){
+				x = false;
+					//console.log(x);
+				break;
+			} else {
+				x = true;
+					//console.log(x);
+			}
+		}
 	
-	
-	
-	
-	
-	
-	
-	var locale = [];
-	//console.log(parseInt(pArea[9].style.top));
-	//console.log(parseInt(pArea[9].style.top) === 200);
-	//unuused code 
-	
-	//console.log(pArea[1].style.backgroundPosition);
-	
-	
-	//console.log(parseInt(pArea[1].style.backgroundPosition));
-	
-	//list of positions
-	//console.log(locale);
-	
-	//var lMod = locale.map(x => parseInt(x));
-	
-	//prints x values
-	//console.log(lMod);
-	
-	/*test region
-	
-	var acPos = parseInt(pArea[14].style.left[0]) + 1;
-	console.log(`The real position of this piece is: ${acPos}units from the left`);
-	*/
-	//pArea[14].style.top = "300px";
-	
-
-}
-
-
-
-
-/*
-var appFrame = () =>{
-	for(var i = 0; i < pArea.length; i++){
-		pArea[i].classList.add("puzzlepiece");
+		return x;
 	}
+	
+	console.log(pArea[1]);
+	/*Adding event listners for each piece 
+	pArea[0].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[1].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[2].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[3].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[4].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[5].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[6].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[7].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[8].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[9].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[10].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[11].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[12].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[13].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[14].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	pArea[14].addEventListener("mouseover", function(){
+		if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+		}
+	});
+	*/
+	
+	//Adding event listners for each piece (Using for loop);
+	for(var i = 1; i < pArea.length; i++){
+		pArea[i].addEventListener("mouseover", function(){
+			if(isMoveable(this.id)){
+			this.classList.add("movablepiece");
+			}
+		})
+	};
+	
 }
-*/
+	
+	
+
+
+
+
+
