@@ -3,7 +3,8 @@
 window.onload = function(){
 	const pArea = document.querySelector("#puzzlearea").querySelectorAll("div");
 	const fpArea = document.querySelector("#puzzlearea");
-	console.log(pArea);
+	const button = document.querySelector("#shufflebutton");
+	
 	
 	var locList = ["square_1_1","square_1_2","square_1_3","square_1_4",
 				"square_2_1","square_2_2","square_2_3","square_2_4",
@@ -113,7 +114,7 @@ window.onload = function(){
 	
 	reCal();
 	
-	//Function to move a puzzle pieces (EMPTY!)
+	//Function to move a puzzle pieces 
 	var movePiece = (piece, x,y) =>{
 		piece.style.left = x + 'px';
 		piece.style.top = y + 'px';
@@ -198,7 +199,7 @@ window.onload = function(){
 			}
 			break;
 		
-		case "square_2_1_":
+		case "square_2_1":
 			if (isEmpty("square_1_1")){
 				return true;
 			} else if(isEmpty("square_2_2")){
@@ -356,41 +357,9 @@ window.onload = function(){
 	//to check if a square is empty by checking if the id exists on any of the puzzlepieces
 	// if true the id exists on one of the pieces and false if otherwise.
 	var isEmpty = (sqr) =>{
-		//for(var i = 0; i < locList.length; i++)
-		/*
-		var dList = [];
-		//return pArea[1].id;
-		//for loop to retrive the id for each piece
-		for(var c = 0; c < pArea.length; c++){
-			dList.push(pArea[c].id);
-		}
-		
-		//return dList;
-		var status;
-		
-		for(var x = 0; x < dList.length; x++){
-			
-			if(sqr == dList[x]){
-				status = 0;
-			} else{
-				status = 1;
-			}
-			
-		}
-		
-		if(status == 0){
-			
-			return true;
-			
-		} else if(status == 1){
-			
-			return false;
-			
-		}*/
-		
 		
 		var x
-		//while (x != 0)
+		
 		for (var a = 0; a < pArea.length; a++){
 			
 				//console.log(pArea[a].id);
@@ -407,89 +376,7 @@ window.onload = function(){
 		return x;
 	}
 	
-	console.log(pArea[1]);
-	/*Adding event listners for each piece 
-	pArea[0].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[1].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[2].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[3].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[4].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[5].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[6].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[7].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[8].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[9].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[10].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[11].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[12].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[13].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[14].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	pArea[14].addEventListener("mouseover", function(){
-		if(isMoveable(this.id)){
-			this.classList.add("movablepiece");
-		}
-	});
-	*/
+	
 	
 	//Adding mouseover event listners for each piece (Using for loop);
 	for(var i = 0; i < pArea.length; i++){
@@ -506,10 +393,8 @@ window.onload = function(){
 	for(var i = 0; i < pArea.length; i++){
 		pArea[i].addEventListener("click", function(){
 			if(isMoveable(this.id)){
-				//thi
-				console.log(findEmpty());
 				movePiece(this,getxCoords(findEmpty()),getyCoords(findEmpty()))
-				console.log(findEmpty());
+				
 			}
 		});
 	};
@@ -537,14 +422,37 @@ window.onload = function(){
 	
 	
 	
-	console.log(findEmpty());
-	console.log(getxCoords(findEmpty()));
-	console.log(getyCoords(findEmpty()));
 	
-	/*Test to move piece at 4x3
-	pArea[14].addEventListener("click", function(){
-		this.style.left = (parseInt(this.style.left) + 100) + 'px';
-	});*/
+	var shuffle = () =>{
+		
+		for(var x = 0; x < 500; x++){
+			var toMove = [];
+			
+			for(var i = 0; i < pArea.length; i++){
+				
+				if(isMoveable(pArea[i].id)){
+					
+					toMove.push(pArea[i]);
+					
+				}
+			}
+			
+			movePiece(toMove[Math.floor((Math.random() * toMove.length))],getxCoords(findEmpty()),getyCoords(findEmpty()));
+		}
+	}
+	
+	/* Dead function
+	function rSelect(num){
+		
+		Math.floor((Math.random() * num));
+	
+	}*/
+	
+	
+	button.addEventListener("click", function(){
+		shuffle();
+	});
+	
 }
 	
 	
